@@ -1,7 +1,6 @@
 package cryptoanalizer;
 
 import java.io.*;
-import java.util.Scanner;
 
 public class CaesarCipher {
     static final String RU_ALPHABET = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
@@ -12,14 +11,22 @@ public class CaesarCipher {
         } else return symbol;
     }
 
+    static char decipher(char symbol, int key) {
+        if (RU_ALPHABET.indexOf(symbol) != -1) {
+            int index = (RU_ALPHABET.indexOf(symbol) - key) % RU_ALPHABET.length();
+            if (index < 0) {
+                index = RU_ALPHABET.length() + index;
+            }
+            return RU_ALPHABET.charAt(index);
+        } else return symbol;
+    }
 
-    public void encoding(int Key) {
-        try (Scanner scan = new Scanner(System.in);
 
-             FileReader fileReader = new FileReader(scan.nextLine());
+    public void encoding(String Path, int Key) {
+        try (FileReader fileReader = new FileReader(Path);
              BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-             FileWriter fileWriter = new FileWriter("src/files/encrypted file.txt");
+             FileWriter fileWriter = new FileWriter("src/files/encrypted-file.txt");
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
 
 
@@ -38,7 +45,26 @@ public class CaesarCipher {
     }
 
 
-    public void decoding(int Key) {
+    public void decoding(String Path, int Key) {
+        try (FileReader fileReader = new FileReader(Path);
+             BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+             FileWriter fileWriter = new FileWriter("src/files/decrypted-file.txt");
+             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+
+
+            while (bufferedReader.ready()) {
+                String line = bufferedReader.readLine().toLowerCase();
+                for (int i = 0; i < line.length(); i++) {
+                    bufferedWriter.write(decipher(line.charAt(i), Key));
+                }
+                bufferedWriter.newLine();
+            }
+
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e);
+        }
 
     }
 }
