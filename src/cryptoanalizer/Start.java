@@ -29,7 +29,7 @@ public class Start {
                 String path = scan.next();
                 System.out.print("Введите ключ: ");
                 int key = scan.nextInt();
-                caesar.encoding(path, key);
+                caesar.encode(path, key);
                 System.out.println("Ваш зашифрованный файл находится в: src/files/encrypted-file.txt");
                 break;
             case 2:
@@ -37,13 +37,13 @@ public class Start {
                 String path2 = scan.next();
                 System.out.print("Введите ключ: ");
                 int key2 = scan.nextInt();
-                caesar.decoding(path2, key2);
+                caesar.decode(path2, key2);
                 System.out.println("Ваш расшифрованный файл находится в: src/files/decrypted-file.txt");
                 break;
             case 3:
                 System.out.print("Введите путь к файлу: ");
                 String path3 = scan.next();
-                caesar.methodBruteForce(path3);
+                caesar.decryptBruteForce(path3);
                 System.out.println("Ваш расшифрованный файл находится в: src/files/bruteforce-file.txt");
                 break;
             case 4:

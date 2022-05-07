@@ -5,7 +5,7 @@ import java.io.*;
 public class CaesarCipher {
     static final String RU_ALPHABET = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя.,\":-!? ";
 
-    private static char cipher(char symbol, int key) {
+    private static char encrypt(char symbol, int key) {
         if (RU_ALPHABET.indexOf(symbol) != -1) {
             return RU_ALPHABET.charAt((RU_ALPHABET.indexOf(symbol) + key) % RU_ALPHABET.length());
         } else return symbol;
@@ -22,7 +22,7 @@ public class CaesarCipher {
     }
 
 
-    public void encoding(String Path, int Key) {
+    public void encode(String Path, int Key) {
         try (FileReader fileReader = new FileReader(Path);
              BufferedReader bufferedReader = new BufferedReader(fileReader);
 
@@ -33,7 +33,7 @@ public class CaesarCipher {
             while (bufferedReader.ready()) {
                 String line = bufferedReader.readLine().toLowerCase();
                 for (int i = 0; i < line.length(); i++) {
-                    bufferedWriter.write(cipher(line.charAt(i), Key));
+                    bufferedWriter.write(encrypt(line.charAt(i), Key));
                 }
                 bufferedWriter.newLine();
             }
@@ -45,7 +45,7 @@ public class CaesarCipher {
     }
 
 
-    public void decoding(String Path, int Key) {
+    public void decode(String Path, int Key) {
         try (FileReader fileReader = new FileReader(Path);
              BufferedReader bufferedReader = new BufferedReader(fileReader);
 
@@ -66,9 +66,10 @@ public class CaesarCipher {
             System.out.println("Error: " + e);
         }
 
+
     }
 
-    public void methodBruteForce(String Path) {
+    public void decryptBruteForce(String Path) {
         try (FileReader fileReader = new FileReader(Path);
              BufferedReader bufferedReader = new BufferedReader(fileReader);
 
