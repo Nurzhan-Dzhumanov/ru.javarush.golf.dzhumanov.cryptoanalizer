@@ -3,7 +3,7 @@ package cryptoanalizer;
 import java.io.*;
 
 public class CaesarCipher {
-    static final String RU_ALPHABET = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+    static final String RU_ALPHABET = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя.,\":-!? ";
 
     private static char cipher(char symbol, int key) {
         if (RU_ALPHABET.indexOf(symbol) != -1) {
